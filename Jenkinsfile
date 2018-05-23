@@ -22,7 +22,7 @@ pipeline {
 
   post {
     always {
-      echo "I'm done"
+      echo "I'm done come and get me"
     }
     success {
       echo "Test completed successfully"
