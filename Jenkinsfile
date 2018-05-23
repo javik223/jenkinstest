@@ -1,15 +1,17 @@
-pipeline {
-  agent any 
-
-  environment {
-    DISABLE_AUTH = 'true'
-    DB_ENGINE = 'sqlite'
+pipleline {
+  agent {
+    docker {
+      image 'node:8-alpine'
+      args '-p 3000:3000'
+    }
   }
 
   stages {
     stage('Build') {
       steps {
-        sh 'printenv'
+        sh 'npm install nodemon'
+        sh 'npm install'
+        sh 'nodemon .'
       }
     }
   }

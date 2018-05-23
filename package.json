@@ -1,0 +1,20 @@
+{
+  "name": "tuts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javik223/jenkinstest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javik223/jenkinstest/issues"
+  },
+  "homepage": "https://github.com/javik223/jenkinstest#readme"
+}
