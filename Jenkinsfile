@@ -26,6 +26,10 @@ pipeline {
     }
     success {
       echo "Test completed successfully"
+      deleteDir()
+      mail to: 'victoryjames@witts-stratts.com',
+            subject: "Build succeeded ${currentBuild.fullDisplayName}",
+            body: "We are live in production. with ${env.BUILD_URL}"
     }
     failure {
       echo "Error completing test"
