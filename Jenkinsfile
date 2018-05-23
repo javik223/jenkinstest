@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh 'npm install nodemon'
         sh 'npm install'
-        sh 'nodemon .'
+        sh 'node index.js'
       }
     }
   }
