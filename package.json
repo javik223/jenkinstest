@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/javik223/jenkinstest/issues"
   },
-  "homepage": "https://github.com/javik223/jenkinstest#readme"
+  "homepage": "https://github.com/javik223/jenkinstest#readme",
+  "devDependencies": {
+    "jest": "^22.4.4"
+  }
 }

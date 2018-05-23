@@ -9,10 +9,26 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'npm install nodemon'
         sh 'npm install'
-        sh 'node index.js'
+        sh 'npm install -g jest'
       }
+    }
+    stage('Test') {
+      steps {
+        sh 'jest'
+      }
+    }
+  }
+
+  post {
+    always {
+      echo "I'm done"
+    }
+    success {
+      echo "Test completed successfully"
+    }
+    failure {
+      echo "Error completing test"
     }
   }
 }
