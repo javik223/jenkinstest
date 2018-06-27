@@ -16,5 +16,6 @@ describe('Tests user function', () => {
     const myUsers = new Users(users);
 
     expect(myUsers.getUsers()).toEqual(users);
+    expect(myUsers.getUsers()).toContain('emekus');
   });
 });
