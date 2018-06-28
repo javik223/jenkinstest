@@ -59,12 +59,15 @@ pipeline {
       }
     }
 
-    stage('Test') {
-      echo "I'm done testing"
-    }
+    // stage('Test') {
+    //   echo "I'm done testing"
+    // }
   }
 
   post {
+    always {
+      junit '**/target/*.xml'
+    }
     success {
       echo "${env.CurrentBuild}"
       echo "${env.CC}"
