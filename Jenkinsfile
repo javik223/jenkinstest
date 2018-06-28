@@ -38,31 +38,31 @@
 //   }
 // }
 
-pipeline {
-  agent any
-  environment {
-    CC = 'clang'
-  }
+// pipeline {
+//   agent any
+//   environment {
+//     CC = 'clang'
+//   }
 
-  // Added parameter
-  parameters {
-    string(name: 'Greeting', description: 'How should I greet the world?')
-  }
+//   // Added parameter
+//   parameters {
+//     string(name: 'Greeting', description: 'How should I greet the world?')
+//   }
 
-  stages {
-    stage('Example') {
-      environment {
-        DEBUG_FLAG = '-g'
-      }
-      steps {
-        sh 'printenv'
-      }
-    }
+//   stages {
+//     stage('Example') {
+//       environment {
+//         DEBUG_FLAG = '-g'
+//       }
+//       steps {
+//         sh 'printenv'
+//       }
+//     }
 
-    // stage('Test') {
-    //   echo "I'm done testing"
-    // }
-  }
+//     // stage('Test') {
+//     //   echo "I'm done testing"
+//     // }
+//   }
 
 //   post {
 //     always {
@@ -91,34 +91,36 @@ pipeline {
       }
     }
 
-    stage('Test on Linux') {
-      agent {
-        label 'linux'
-      }
-      steps {
-        untash 'app'
-        sh 'make check'
-      }
-      post {
-        always {
-          junit '**/target/*.xml'
+    parallel {
+      stage('Test on Linux') {
+        agent {
+          label 'linux'
+        }
+        steps {
+          untash 'app'
+          sh 'make check'
+        }
+        post {
+          always {
+            junit '**/target/*.xml'
+          }
         }
       }
-    }
 
-    stage('Test on Windows') {
-      agent {
-        label 'windows'
-      }
-      steps {
-        unstash 'app'
-        bat 'make check'
-      }
-      post {
-        always {
-          junit '**/target/*.xml'
+      stage('Test on Windows') {
+        agent {
+          label 'windows'
+        }
+        steps {
+          unstash 'app'
+          bat 'make check'
+        }
+        post {
+          always {
+            junit '**/target/*.xml'
+          }
         }
       }
-    }
+      }
   }
 }
