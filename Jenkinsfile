@@ -128,10 +128,8 @@
 
 // Back to our tests
 pipeline {
-    // parameters {
-  //   string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-  // }
   agent any
+
    stages {
     parallel {
       stage('Staging - Build') {
