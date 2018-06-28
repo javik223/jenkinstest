@@ -152,10 +152,4 @@ pipeline {
       }
     }
   }
-
-  post {
-    always {
-      cleanWs()
-    }
-  }
 }
