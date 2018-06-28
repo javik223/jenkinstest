@@ -44,6 +44,11 @@ pipeline {
     CC = 'clang'
   }
 
+  // Added parameter
+  parameters {
+    string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
+  }
+
   stages {
     stage('Example') {
       environment {
@@ -62,7 +67,7 @@ pipeline {
       mail to: 'Victory James Ugwudike <victoryjames@witts-stratts.com>',
           from: 'infrastructure@witts-stratts.com',
           subject: 'New Updated build',
-          body: "This is the new update. ${env.CC}"
+          body: "This is the new update. ${env.CC}. Hello ${params.Greeting} World!"
     }
   }
 }
