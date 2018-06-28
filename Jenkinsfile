@@ -131,7 +131,7 @@ pipeline {
   agent any
 
    stages {
-    stage {
+    stage('All of the above') {
     parallel {
       stage('Staging - Build') {
         agent {
