@@ -64,17 +64,61 @@ pipeline {
     // }
   }
 
-  post {
-    always {
-      junit '**/target/*.xml'
+//   post {
+//     always {
+//       junit '**/target/*.xml'
+//     }
+//     success {
+//       echo "${env.CurrentBuild}"
+//       echo "${env.CC}"
+//       mail to: 'Victory James Ugwudike <victoryjames@witts-stratts.com>',
+//           from: 'infrastructure@witts-stratts.com',
+//           subject: 'New Updated build',
+//           body: "This is the new update. ${env.CC}. Hello ${params.Greeting} World!"
+//     }
+//   }
+// }
+
+pipeline {
+  agent none
+  stages {
+    stage('Build') {
+      agent any
+      steps {
+        checkout scm
+        sh 'make'
+        stash includes: '**/target/*.jar', name: 'app'
+      }
     }
-    success {
-      echo "${env.CurrentBuild}"
-      echo "${env.CC}"
-      mail to: 'Victory James Ugwudike <victoryjames@witts-stratts.com>',
-          from: 'infrastructure@witts-stratts.com',
-          subject: 'New Updated build',
-          body: "This is the new update. ${env.CC}. Hello ${params.Greeting} World!"
+
+    stage('Test on Linux') {
+      agent {
+        label 'linux'
+      }
+      steps {
+        untash 'app'
+        sh 'make check'
+      }
+      post {
+        always {
+          junit '**/target/*.xml'
+        }
+      }
+    }
+
+    stage('Test on Windows') {
+      agent {
+        label 'windows'
+      }
+      steps {
+        unstash 'app'
+        bat 'make check'
+      }
+      post {
+        always {
+          junit '**/target/*.xml'
+        }
+      }
     }
   }
 }
