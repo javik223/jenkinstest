@@ -135,6 +135,10 @@ pipeline {
     }
   }
 
+  parameters {
+    string(name: 'Greeting', defaultValue: 'Hello', description: def 'How should I greet the world?')
+  }
+
   stages {
     stage('Build') {
       steps {
