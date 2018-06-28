@@ -131,6 +131,7 @@ pipeline {
   agent any
 
    stages {
+    stage {
     parallel {
       stage('Staging - Build') {
         agent {
@@ -160,6 +161,7 @@ pipeline {
           sh 'jest'
         }
       }
+    }
     }
   }
 }
