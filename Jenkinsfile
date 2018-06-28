@@ -79,48 +79,68 @@
 //   }
 // }
 
+// pipeline {
+//   agent none
+//   stages {
+//     stage('Build') {
+//       agent any
+//       steps {
+//         checkout scm
+//         sh 'make'
+//         stash includes: '**/target/*.jar', name: 'app'
+//       }
+//     }
+
+//     parallel {
+//       stage('Test on Linux') {
+//         agent {
+//           label 'linux'
+//         }
+//         steps {
+//           untash 'app'
+//           sh 'make check'
+//         }
+//         post {
+//           always {
+//             junit '**/target/*.xml'
+//           }
+//         }
+//       }
+
+//       stage('Test on Windows') {
+//         agent {
+//           label 'windows'
+//         }
+//         steps {
+//           unstash 'app'
+//           bat 'make check'
+//         }
+//         post {
+//           always {
+//             junit '**/target/*.xml'
+//           }
+//         }
+//       }
+//       }
+//   }
+// }
+
+
+// Back to our tests
 pipeline {
-  agent none
+  agent {
+    docker { image 'node:7-alpine', args '-p 3000:3000'}
+  }
+
   stages {
     stage('Build') {
-      agent any
+      sh 'npm install && npm install -g jest'
+    }
+    stage('Test') {
       steps {
-        checkout scm
-        sh 'make'
-        stash includes: '**/target/*.jar', name: 'app'
+        sh 'node --version'
+        sh 'jest'
       }
     }
-
-    parallel {
-      stage('Test on Linux') {
-        agent {
-          label 'linux'
-        }
-        steps {
-          untash 'app'
-          sh 'make check'
-        }
-        post {
-          always {
-            junit '**/target/*.xml'
-          }
-        }
-      }
-
-      stage('Test on Windows') {
-        agent {
-          label 'windows'
-        }
-        steps {
-          unstash 'app'
-          bat 'make check'
-        }
-        post {
-          always {
-            junit '**/target/*.xml'
-          }
-        }
-      }
-      }
   }
 }
