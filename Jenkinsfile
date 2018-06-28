@@ -58,6 +58,10 @@ pipeline {
         sh 'printenv'
       }
     }
+
+    stage('Test') {
+      echo "I'm done testing"
+    }
   }
 
   post {
