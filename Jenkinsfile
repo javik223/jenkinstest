@@ -131,8 +131,9 @@ pipeline {
     // parameters {
   //   string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
   // }
-  parallel {
-    stages {
+  agent any
+   stages {
+    parallel {
       stage('Staging - Build') {
         agent {
           docker {
