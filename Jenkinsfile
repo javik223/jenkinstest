@@ -150,7 +150,7 @@ pipeline {
       stage('Staging - Build') {
         agent {
           docker {
-            image 'node:8-alpine'
+            image 'node:6-alpine'
             args '-p 3010:3000'
           }
         }
