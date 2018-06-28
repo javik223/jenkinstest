@@ -58,6 +58,7 @@ pipeline {
   post {
     success {
       echo "${env.CurrentBuild}"
+      echo "${env.CC}"
     }
   }
 }
