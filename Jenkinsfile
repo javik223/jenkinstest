@@ -60,7 +60,7 @@ pipeline {
       echo "${env.CurrentBuild}"
       echo "${env.CC}"
       mail to: 'Victory James Ugwudike <victoryjames@witts-stratts.com>',
-          from: 'infrasctructure@witts-stratts.com',
+          from: 'infrastructure@witts-stratts.com',
           subject: 'New Updated build',
           body: "This is the new update. ${env.CC}"
     }
