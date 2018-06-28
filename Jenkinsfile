@@ -54,4 +54,10 @@ pipeline {
       }
     }
   }
+
+  post {
+    success {
+      echo "${env.CurrentBuild}"
+    }
+  }
 }
