@@ -147,7 +147,7 @@ pipeline {
           sh 'jest'
         }
       }
-      stage('Staging - Build') {
+      stage('Staging - Production') {
         agent {
           docker {
             image 'node:6-alpine'
