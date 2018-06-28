@@ -128,27 +128,38 @@
 
 // Back to our tests
 pipeline {
-  agent {
-    docker {
-      image 'node:9-alpine'
-      args '-p 3000:3000'
-    }
-  }
-
-  // parameters {
+    // parameters {
   //   string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
   // }
+  parallel {
+    stages {
+      stage('Staging - Build') {
+        agent {
+          docker {
+            image 'node:9-alpine'
+            args '-p 3000:3000'
+          }
+        }
 
-  stages {
-    stage('Build') {
-      steps {
-        sh 'npm install && npm install -g jest'
+        steps {
+          sh 'npm install && npm install -g jest'
+          sh 'node --version'
+          sh 'jest'
+        }
       }
-    }
-    stage('Test') {
-      steps {
-        sh 'node --version'
-        sh 'jest'
+      stage('Staging - Build') {
+        agent {
+          docker {
+            image 'node:8-alpine'
+            args '-p 3010:3000'
+          }
+        }
+
+        steps {
+          sh 'npm install && npm install -g jest'
+          sh 'node --version'
+          sh 'jest'
+        }
       }
     }
   }
