@@ -134,7 +134,9 @@ pipeline {
 
   stages {
     stage('Build') {
-      sh 'npm install && npm install -g jest'
+      steps {
+        sh 'npm install && npm install -g jest'
+      }
     }
     stage('Test') {
       steps {
