@@ -19,5 +19,6 @@
   "homepage": "https://github.com/javik223/jenkinstest#readme",
   "dependencies": {
     "jest": "^22.4.4"
-  }
+  },
+  "devDependencies": {}
 }
