@@ -156,7 +156,7 @@ pipeline {
         }
 
         steps {
-          sh 'npm install && npm install -g jest'
+          sh 'npm install'
           sh 'node --version'
           sh 'jest'
         }
