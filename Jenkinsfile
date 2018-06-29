@@ -144,7 +144,7 @@ pipeline {
         steps {
           sh 'npm install && npm install -g jest'
           sh 'node --version'
-          sh 'jest'
+          sh 'jedst'
         }
       }
       stage('Staging - Production') {
